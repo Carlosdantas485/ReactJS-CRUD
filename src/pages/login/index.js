@@ -13,18 +13,19 @@ function Login() {
   async function handleLogin(e){
   e.preventDefault();
 
+    const data = {
+      username,
+      password,
+    }
+
     if (password.length > 0){
-      const data = {
-        username,
-        password,
-      }
       try{
         const response = await api.post('auth', data);
 
-        localStorage.setItem('token', response.data);
+        localStorage.setItem('token', response.data.token);
+        console.log(response.data);
         History.push('/listagem');
 
-        console.log(response.data);
 
       }
       catch(err){
